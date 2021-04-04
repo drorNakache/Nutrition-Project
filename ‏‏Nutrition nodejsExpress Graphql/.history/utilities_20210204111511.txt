@@ -1,0 +1,10 @@
+
+    deleteBook: {
+      type: BookType,
+      args: {
+        id: { type: GraphQLString },
+      },
+      resolve(parent, args) {
+        return Book.findByIdAndDelete(args.id);
+      },
+    },

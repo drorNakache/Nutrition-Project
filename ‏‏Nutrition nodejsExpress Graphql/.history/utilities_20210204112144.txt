@@ -1,0 +1,28 @@
+//delete a book
+    deleteBook: {
+      type: BookType,
+      args: {
+        id: { type: GraphQLString },
+      },
+      resolve(parent, args) {
+        return Book.findByIdAndDelete(args.id);
+      },
+    },
+
+
+//updating the 
+     updateBook: {
+      type: BookType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLString) },
+        name: { type: new GraphQLNonNull(GraphQLString) },
+        author: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      resolve(parentValue, args) {
+        return Book.findOneAndUpdate(
+          { _id: args.id },
+          { $set: { name: args.name, author: args.author } },
+          { new: true } //returns new document
+        );
+      },
+    },
